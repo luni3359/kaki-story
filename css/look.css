@@ -1,0 +1,53 @@
+:root {
+  --header-height: 30px;
+  --sidebar-width: 150px;
+  --bottombar-height: 150px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+}
+
+.box {
+  border-style: solid;
+  border-width: 5px 0 0 5px;
+  border-color: #C3C3C3;
+}
+
+#game {
+  margin: 25px auto 0 auto;
+  height: 500px;
+  width: 1000px;
+  background-color: whitesmoke;
+  border-style: solid;
+  border-width: 0 5px 5px 0;
+  border-color: #C3C3C3;
+}
+
+#header {
+  height: var(--header-height);
+}
+
+#sidebar {
+  float: left;
+  height: calc(100% - var(--header-height));
+  width: var(--sidebar-width);
+}
+
+#sidebar #option-detail {
+  height: calc(100% - var(--bottombar-height));
+}
+
+#sidebar #minimap {
+  height: var(--bottombar-height);
+}
+
+#play {
+  float: left;
+  height: calc(100% - var(--header-height));
+  width: calc(100% - var(--sidebar-width));
+}
