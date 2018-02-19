@@ -1,18 +1,34 @@
-var div = document.getElementById('gamebody');
-var a = document.getElementById('title');
-
-setInterval(() => {
-a.innerText = `${div.offsetWidth}px, ${div.offsetHeight}px`;
-}, 500);
-
-var x = document.getElementsByTagName('td');
-
-for (let i = 0; i < x.length; i++) {
-    let div = document.createElement('div');
-    div.innerText = x[i].innerText;
-    x[i].innerText = '';
-    x[i].appendChild(div);
+function rnd() {
+    return Math.floor(Math.random() * 256);
 }
 
-var w = document.getElementById('content');
-// w.addEventListener('');
+function makeOption(text) {
+    let option = document.createElement('div');
+    option.classList.add('option');
+    option.innerText = text || '';
+
+    return option;
+}
+
+function showOptions(howmany) {
+    let choose = document.getElementById('choose');
+
+    while(choose.hasChildNodes()) {
+        choose.removeChild(choose.lastChild);
+    }
+
+    for(let i = 0; i < howmany; i++) {
+        let option = makeOption(`option ${i + 1}`);
+        choose.appendChild(option);
+    }
+}
+
+window.addEventListener('load', () => {
+    let divs = document.querySelectorAll('div');
+
+    for (let i = 0; i < divs.length; i++) {
+        divs[i].style['background-color'] = `rgb(${rnd()}, ${rnd()}, ${rnd()})`;
+    }
+
+    showOptions(5);
+});
