@@ -15,4 +15,4 @@ for (let i = 0; i < x.length; i++) {
 }
 
 var w = document.getElementById('content');
-w.addEventListener('')
+// w.addEventListener('');
