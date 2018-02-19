@@ -1,63 +1,63 @@
-// @import "variables";
-$height_game: 500px;
-$width_game: 1000px;
-
-$contrast_border: #C3C3C3;
-
 :root {
-    --header-height: 30px;
-    --sidebar-width: 150px;
-    --bottombar-height: 150px;
-}
+    // The style variables
+    --game-height: 500px;
+    --game-width: 1000px;
 
-* {
-    box-sizing: border-box;
+    --title-height: 22px;
+    --options-height: 110px;
+    --sidebar-width: 125px;
+
+    --stroke-width: 6px;
+    --stroke-color: #C3C3C3;
+    --backgroud-color: #F5F5F5;
 }
 
 html, body {
     margin: 0;
+    font-family: 'Open Sans';
 }
 
-.box {
+table, tbody, tr, td {
+    vertical-align: unset;
     border: {
         style: solid;
-        width: 5px 0 0 5px;
-        color: $contrast_border;
+        width: 0;
+        color: var(--stroke-color);
+        collapse: collapse;
     }
 }
 
-#game {
-    margin: 25px auto 0 auto;
-    height: $height_game;
-    width: $width_game;
-    background-color: whitesmoke;
-    border: {
-        style: solid;
-        width: 0 5px 5px 0;
-        color: $contrast_border;
-    }
+table {
+    table-layout: fixed;
 }
 
-#header {
-    height: var(--header-height);
+td {
+    overflow: hidden;
+    border-width: var(--stroke-width);
 }
 
-#sidebar {
-    float: left;
-    height: calc(100% - var(--header-height));
+div {
+    height: 0;
+    padding: 4px;
+    box-sizing: border-box;
+}
+
+.sidebar {
     width: var(--sidebar-width);
-
-    #option-detail {
-        height: calc(100% - var(--bottombar-height));
-    }
-
-    #minimap {
-        height: var(--bottombar-height);
-    }
 }
 
-#play {
-    float: left;
-    height: calc(100% - var(--header-height));
-    width: calc(100% - var(--sidebar-width));
+.group2 {
+    height: var(--options-height);
+}
+
+#gamebody {
+    margin: 10px auto 0 auto;
+    height: var(--game-height);
+    width: var(--game-width);
+    background-color: var(--backgroud-color);
+}
+
+#title {
+    height: var(--title-height);
+    background-color: red;
 }
