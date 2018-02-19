@@ -1,0 +1,27 @@
+{
+  "name": "kaki-story",
+  "version": "1.0.0",
+  "description": "Concept work",
+  "main": "index.js",
+  "scripts": {
+    "serve": "serve ./",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luni3359/kaki-story.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luni3359/kaki-story/issues"
+  },
+  "homepage": "https://github.com/luni3359/kaki-story#readme",
+  "devDependencies": {
+    "browser-sync": "^2.23.6",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0",
+    "serve": "^6.4.10"
+  }
+}

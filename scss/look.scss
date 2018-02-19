@@ -1,0 +1,63 @@
+:root {
+    // The style variables
+    --game-height: 500px;
+    --game-width: 1000px;
+
+    --title-height: 22px;
+    --options-height: 110px;
+    --sidebar-width: 125px;
+
+    --stroke-width: 6px;
+    --stroke-color: #C3C3C3;
+    --backgroud-color: #F5F5F5;
+}
+
+html, body {
+    margin: 0;
+    font-family: 'Open Sans';
+}
+
+table, tbody, tr, td {
+    vertical-align: unset;
+    border: {
+        style: solid;
+        width: 0;
+        color: var(--stroke-color);
+        collapse: collapse;
+    }
+}
+
+table {
+    table-layout: fixed;
+}
+
+td {
+    overflow: hidden;
+    border-width: var(--stroke-width);
+}
+
+div {
+    height: 0;
+    padding: 4px;
+    box-sizing: border-box;
+}
+
+.sidebar {
+    width: var(--sidebar-width);
+}
+
+.group2 {
+    height: var(--options-height);
+}
+
+#gamebody {
+    margin: 10px auto 0 auto;
+    height: var(--game-height);
+    width: var(--game-width);
+    background-color: var(--backgroud-color);
+}
+
+#title {
+    height: var(--title-height);
+    background-color: red;
+}
