@@ -1,6 +1,15 @@
 :root {
   --game-height: 500px;
   --game-width: 907px;
+  --game-border-width: 4px;
+  --header-height: 15px;
+  --act-height: 75px;
+  --description-width: 112px;
+  --unsure-width: 112px;
+}
+
+* {
+  border-color: cyan;
 }
 
 html, body {
@@ -8,18 +17,28 @@ html, body {
   padding: 0;
 }
 
+.cell {
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
 #preview {
   cursor: pointer;
   opacity: 0.2;
   position: absolute;
   top: 0;
-  left: 0;
+  left: 50%;
   height: 500px;
   width: 907px;
   background-image: url("/target.png");
   background-position: -5px 0;
   transition-property: opacity;
   transition-duration: 0.5s;
+  transform: translateX(-50%);
 }
 
 #preview:hover {
@@ -27,7 +46,95 @@ html, body {
 }
 
 #game-body {
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin: 0 auto;
   height: var(--game-height);
   width: var(--game-width);
+  border-style: solid;
+  border-width: var(--game-border-width);
+}
+
+#game-body div {
+  border-style: solid;
+  border-width: 0;
+}
+
+#game-body .row {
+  display: flex;
+  border-width: 0 0 var(--game-border-width) 0;
+}
+
+#game-body .row > div {
+  position: relative;
+}
+
+#game-body .row:last-child {
+  border-width: 0;
+}
+
+#game-body .header {
+  flex: 0 0 auto;
+  height: var(--header-height);
+}
+
+#game-body .content {
+  flex: 1 0 auto;
+}
+
+#game-body .content #description {
+  flex: 0 0 auto;
+  width: var(--description-width);
+  border-width: 0 var(--game-border-width) 0 0;
+}
+
+#game-body .content #story {
+  flex: 1 0 auto;
+  border-width: 0;
+}
+
+#game-body .act {
+  flex: 0 0 auto;
+  height: var(--act-height);
+}
+
+#game-body .act #unsure {
+  flex: 0 0 auto;
+  width: var(--unsure-width);
+  border-width: 0 var(--game-border-width) 0 0;
+}
+
+#game-body .act #options {
+  flex: 1 0 auto;
+}
+
+.header {
+  background-color: #79b790;
+}
+
+#description {
+  background-color: #c26b7b;
+}
+
+#story {
+  background-color: #e8c84a;
+}
+
+#unsure {
+  background-color: #0643c9;
+}
+
+#options .cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #8573bb;
+}
+
+#options .cell .option {
+  flex: 0 0 auto;
+  margin: 0 2px;
+  padding: 5px 10px;
 }
