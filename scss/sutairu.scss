@@ -1,0 +1,150 @@
+:root {
+    --game-height: 500px;
+    --game-width: 907px;
+    --game-border-width: 4px;
+
+    --header-height: 15px;
+    --act-height: 75px;
+
+    --description-width: 112px;
+    --unsure-width: 112px;
+}
+
+* {
+    border-color: cyan;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.cell {
+    overflow: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#preview {
+    cursor: pointer;
+    opacity: 0.2;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 500px;
+    width: 907px;
+    background: {
+        image: url('/target.png');
+        position: -5px 0;
+    }
+    transition: {
+        property: opacity;
+        duration: 0.5s;
+    }
+    transform: translateX(-50%);
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+#game-body {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin: 0 auto;
+    height: var(--game-height);
+    width: var(--game-width);
+    border: {
+        style: solid;
+        width: var(--game-border-width);
+    }
+
+    div {
+        border: {
+            style: solid;
+            width: 0;
+        }
+    }
+
+    .row {
+        display: flex;
+        border-width: 0 0 var(--game-border-width) 0;
+
+        > div {
+            position: relative;
+        }
+
+        &:last-child {
+            border-width: 0;
+        }
+    }
+
+    .header {
+        flex: 0 0 auto;
+        height: var(--header-height);
+    }
+
+    .content {
+        flex: 1 0 auto;
+
+        #description {
+            flex: 0 0 auto;
+            width: var(--description-width);
+            border-width: 0 var(--game-border-width) 0 0;
+        }
+
+        #story {
+            flex: 1 0 auto;
+            border-width: 0;
+        }
+    }
+
+    .act {
+        flex: 0 0 auto;
+        height: var(--act-height);
+
+        #unsure {
+            flex: 0 0 auto;
+            width: var(--unsure-width);
+            border-width: 0 var(--game-border-width) 0 0;
+        }
+
+        #options {
+            flex: 1 0 auto;
+        }
+    }
+}
+
+.header {
+    background-color: #79b790;
+}
+
+#description {
+    background-color: #c26b7b;
+}
+
+#story {
+    background-color: #e8c84a;
+}
+
+#unsure {
+    background-color: #0643c9;
+}
+
+#options .cell{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: #8573bb;
+
+    .option {
+        flex: 0 0 auto;
+        margin: 0 2px;
+        padding: 5px 10px;
+    }
+}
