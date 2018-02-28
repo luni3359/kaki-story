@@ -1,0 +1,33 @@
+:root {
+  --game-height: 500px;
+  --game-width: 907px;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+#preview {
+  cursor: pointer;
+  opacity: 0.2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 500px;
+  width: 907px;
+  background-image: url("/target.png");
+  background-position: -5px 0;
+  transition-property: opacity;
+  transition-duration: 0.5s;
+}
+
+#preview:hover {
+  opacity: 0.8;
+}
+
+#game-body {
+  overflow: hidden;
+  height: var(--game-height);
+  width: var(--game-width);
+}

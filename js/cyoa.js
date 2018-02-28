@@ -3,7 +3,7 @@ function rnd() {
 }
 
 function makeOption(text) {
-    let option = document.createElement('div');
+    let option = document.createElement('button');
     option.classList.add('option');
     option.innerText = text || '';
 
