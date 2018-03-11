@@ -1,10 +1,15 @@
 :root {
-    --game-height: 500px;
-    --game-width: 907px;
+    // --game-height: 500px;
+    // --game-width: 907px;
+    --game-height: 600px;
+    --game-width: 900px;
     --game-border-width: 4px;
+    --game-scrollbar-width: 17px;
+    --game-box-padding: 7px;
 
     --header-height: 15px;
-    --act-height: 75px;
+    // --act-height: 75px;
+    --act-height: 100px;
 
     --description-width: 112px;
     --unsure-width: 112px;
@@ -15,47 +20,39 @@
 }
 
 html, body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     margin: 0;
     padding: 0;
+    height: 100%;
+}
+
+.cell-wrap {
+    overflow-x: hidden;
 }
 
 .cell {
-    overflow: auto;
+    cursor: default;
+    overflow-y: scroll;
     position: absolute;
     top: 0;
+    bottom: 0;
+    right: calc(var(--game-scrollbar-width) * -1);
     left: 0;
-    height: 100%;
-    width: 100%;
-}
+    padding: var(--game-box-padding);
 
-#preview {
-    cursor: pointer;
-    opacity: 0.2;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    height: 500px;
-    width: 907px;
-    background: {
-        image: url('/target.png');
-        position: -5px 0;
-    }
-    transition: {
-        property: opacity;
-        duration: 0.5s;
-    }
-    transform: translateX(-50%);
-
-    &:hover {
-        opacity: 0.8;
-    }
+    // -webkit-user-select: none;
+    // -moz-user-select: none;
+    // -ms-user-select: none;
+    // user-select: none;
 }
 
 #game-body {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    margin: 0 auto;
     height: var(--game-height);
     width: var(--game-width);
     border: {
@@ -135,16 +132,40 @@ html, body {
     background-color: #0643c9;
 }
 
-#options .cell{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    background-color: #8573bb;
+#options {
+
+    .cell {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 0;
+        background-color: #8573bb;
+
+        &.vertical {
+            padding-top: 5px;
+            flex-direction: column;
+        }
+
+        &.hidden {
+            visibility: hidden;
+        }
+    }
 
     .option {
         flex: 0 0 auto;
         margin: 0 2px;
         padding: 5px 10px;
     }
+}
+
+input[type="text"] {
+    text-align: center;
+}
+
+button {
+    cursor: pointer;
+    margin: 2px 0;
+    padding: 2px 8px;
+    border-style: solid;
 }
