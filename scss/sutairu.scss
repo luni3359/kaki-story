@@ -1,22 +1,16 @@
 :root {
-    // --game-height: 500px;
-    // --game-width: 907px;
-    --game-height: 600px;
+    --game-height: 500px;
     --game-width: 900px;
     --game-border-width: 4px;
+    --game-border-color: cyan;
     --game-scrollbar-width: 17px;
     --game-box-padding: 7px;
 
     --header-height: 15px;
-    // --act-height: 75px;
     --act-height: 100px;
 
     --description-width: 112px;
     --unsure-width: 112px;
-}
-
-* {
-    border-color: cyan;
 }
 
 html, body {
@@ -58,12 +52,14 @@ html, body {
     border: {
         style: solid;
         width: var(--game-border-width);
+        color: var(--game-border-color);
     }
 
     div {
         border: {
             style: solid;
             width: 0;
+            color: var(--game-border-color);
         }
     }
 
@@ -122,6 +118,10 @@ html, body {
 
 #description {
     background-color: #c26b7b;
+
+    .cell {
+        font-size: 0.9em;
+    }
 }
 
 #story {
@@ -133,34 +133,26 @@ html, body {
 }
 
 #options {
+    background-color: #8573bb;
 
     .cell {
         display: flex;
-        justify-content: space-around;
+        justify-content: center;
         align-items: center;
         flex-wrap: wrap;
         padding: 0;
-        background-color: #8573bb;
-
-        &.hidden {
-            visibility: hidden;
-        }
     }
 
-    .option {
-        flex: 0 0 auto;
-        margin: 0 2px;
-        padding: 5px 10px;
+    button {
+        cursor: pointer;
+        margin: 6px;
+        padding: 4px 8px;
+        border-style: solid;
     }
-}
 
-input[type="text"] {
-    text-align: center;
-}
-
-button {
-    cursor: pointer;
-    margin: 2px 0;
-    padding: 2px 8px;
-    border-style: solid;
+    input[type="text"] {
+        margin: 6px;
+        padding: 4px 8px;
+        border-style: solid;
+    }
 }
