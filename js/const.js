@@ -19,7 +19,7 @@ const STORY = {
         currentMessage: ''
     },
     settings: {
-        readEnabled: false,
+        readEnabled: true,
         readSpeed: 1
     }
 };
