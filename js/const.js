@@ -2,7 +2,7 @@ const EVENTS = {
     timeout: 200, // Time in ms after which every timed-out event fires
     window: {
         resize: {
-            id: null
+            id: null // id for the Timeout event
         }
     },
     doubleclick: {
@@ -25,7 +25,7 @@ const STORY = {
 };
 
 const DESCRIPTION = {
-    element: document.querySelector('#description')
+    element: document.querySelector('#description .cell')
 };
 
 const OPTIONS = {
@@ -33,10 +33,9 @@ const OPTIONS = {
     type: null, // text / button
     contents: [
         {
-            text: "Word here, if it's a phrase. Or a inner button.",
-            event: function () {
-
-            }
+            text: 'Text inside the button.',
+            event: function () {},
+            description: 'Description on mouse over.'
         }
     ]
 };

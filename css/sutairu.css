@@ -1,17 +1,14 @@
 :root {
-  --game-height: 600px;
+  --game-height: 500px;
   --game-width: 900px;
   --game-border-width: 4px;
+  --game-border-color: cyan;
   --game-scrollbar-width: 17px;
   --game-box-padding: 7px;
   --header-height: 15px;
   --act-height: 100px;
   --description-width: 112px;
   --unsure-width: 112px;
-}
-
-* {
-  border-color: cyan;
 }
 
 html, body {
@@ -46,11 +43,13 @@ html, body {
   width: var(--game-width);
   border-style: solid;
   border-width: var(--game-border-width);
+  border-color: var(--game-border-color);
 }
 
 #game-body div {
   border-style: solid;
   border-width: 0;
+  border-color: var(--game-border-color);
 }
 
 #game-body .row {
@@ -109,6 +108,10 @@ html, body {
   background-color: #c26b7b;
 }
 
+#description .cell {
+  font-size: 0.9em;
+}
+
 #story {
   background-color: #e8c84a;
 }
@@ -117,37 +120,27 @@ html, body {
   background-color: #0643c9;
 }
 
-#options .cell {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 0;
+#options {
   background-color: #8573bb;
 }
 
-#options .cell.vertical {
-  padding-top: 5px;
-  flex-direction: column;
+#options .cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0;
 }
 
-#options .cell.hidden {
-  visibility: hidden;
-}
-
-#options .option {
-  flex: 0 0 auto;
-  margin: 0 2px;
-  padding: 5px 10px;
-}
-
-input[type="text"] {
-  text-align: center;
-}
-
-button {
+#options button {
   cursor: pointer;
-  margin: 2px 0;
-  padding: 2px 8px;
+  margin: 6px;
+  padding: 4px 8px;
+  border-style: solid;
+}
+
+#options input[type="text"] {
+  margin: 6px;
+  padding: 4px 8px;
   border-style: solid;
 }

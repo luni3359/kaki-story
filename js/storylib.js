@@ -1,15 +1,15 @@
-function askWord(message, funct, buttonText) {
+function askWord(funct, text, description) {
     OPTIONS.type = 'text';
     OPTIONS.contents = [
         {
-            text: message,
-            caption: buttonText,
-            event: funct
+            text: text,
+            event: funct,
+            description: description
         }
     ];
 }
 
-function setOption(text, funct) {
+function setOption(funct, text, description) {
     if (OPTIONS.type !== 'button') {
         OPTIONS.type = 'button';
         OPTIONS.contents = [];
@@ -18,7 +18,8 @@ function setOption(text, funct) {
     OPTIONS.contents.push(
         {
             text: text,
-            event: funct
+            event: funct,
+            description: description
         }
     );
 }
@@ -31,18 +32,14 @@ function getResponse() {
 // Use this to write a paragraph, or a word!
 function writeOut(message, position, tagToAppendTo) {
     if (!STORY.settings.readEnabled) {
-        STORY.data.reading = false;
-        STORY.element.innerHTML = message;
+        instantWrite(message);
         return;
     }
 
     if (!position || position === 0) {
         position = 0;
-        STORY.data.reading = true;
-        STORY.data.currentMessage = message;
-        STORY.element.innerHTML = '';
 
-        clearOptions();
+        beginWrite(message);
     }
 
     if (position < message.length) {
@@ -97,53 +94,6 @@ function writeOut(message, position, tagToAppendTo) {
 
         continueWrite(message, position, delay, tagToAppendTo);
     } else {
-        presentOptions();
+        stopWrite();
     }
-}
-
-function printHTMLTagWrite(message, position) {
-    let tagName = ''
-    let char = message[position++];
-
-    // start of tag until it hits end of start tag
-    do {
-        tagName += char;
-        char = message[position++];
-    } while (char !== '>');
-
-    // if it's a line break...
-    if (tagName === 'br') {
-        STORY.element.innerHTML += '<br>';
-        return writeOut(message, position);
-    }
-
-    // tag identified, make an element of it!
-    let tag = makeElement(tagName);
-    STORY.element.appendChild(tag); // add to story element
-
-    writeOut(message, position, tag);
-}
-
-function continueWrite(message, position, delay, tag) {
-    if (tag) {
-        setTimeout(() => {
-            writeOut(message, position, tag);
-        }, delay / STORY.settings.readSpeed);
-    } else {
-        setTimeout(() => {
-            writeOut(message, position);
-        }, delay / STORY.settings.readSpeed);
-    }
-}
-
-// This fully completes text that is showing
-function stopWrite() {
-    // if there's nothing to instantly show...
-    if (STORY.data.currentMessage === '') return;
-
-    STORY.data.reading = false;
-    STORY.element.innerHTML = STORY.data.currentMessage;
-    STORY.data.currentMessage = '';
-
-    presentOptions();
 }

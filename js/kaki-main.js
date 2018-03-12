@@ -11,33 +11,48 @@ function makeElement(type) {
     return element;
 }
 
+function createButton(option, isInputOtherwiseIndex) {
+    let button = makeElement('button');
+
+    button.setAttribute('data-description', option.description || "Please write a description for me! I need to be read by a human to be happy... It's my only purpose after all.");
+
+    if (!option.text) {
+        if (isInputOtherwiseIndex === true) {
+            button.innerHTML = 'OK';
+        } else {
+            button.innerHTML = `Unnamed button #${isInputOtherwiseIndex}`;
+        }
+    } else {
+        button.innerHTML = option.text;
+    }
+
+    button.addEventListener('click', option.event);
+    button.addEventListener('mouseover', showDescription);
+    button.addEventListener('mouseleave', hideDescription);
+
+    return button;
+}
+
 function createButtonOptions() {
     for (let i = 0; i < OPTIONS.contents.length; i++) {
-        let button = makeElement('button');
-
-        button.innerText = OPTIONS.contents[i].text;
-        button.addEventListener('click', OPTIONS.contents[i].event);
+        let option = OPTIONS.contents[i];
+        let button = createButton(option, i + 1);
 
         OPTIONS.element.appendChild(button);
     }
 }
 
 function createTextOption() {
+    let option = OPTIONS.contents[0];
     let input = makeElement('text');
-    let button = makeElement('button');
-    let textInpt = OPTIONS.contents[0];
+    let button = createButton(option, true);
 
     // if Enter key is pressed
     input.addEventListener('keydown', (e) => {
         if (e.keyCode === 13) // Enter key
-            textInpt.event(); // ... then execute funct
+            option.event(); // ... then execute funct
     });
 
-    button.innerHTML = textInpt.caption || 'OK';
-    button.addEventListener('click', textInpt.event);
-
-    setOptionsVertically();
-    OPTIONS.element.innerHTML = textInpt.text;
     OPTIONS.element.appendChild(input);
     OPTIONS.element.appendChild(button);
 }
@@ -46,10 +61,8 @@ function presentOptions() {
     clearOptions();
 
     if (OPTIONS.type === 'text') {
-        setOptionsVertically();
         createTextOption();
     } else if (OPTIONS.type === 'button') {
-        setOptionsHorizontally();
         createButtonOptions();
     }
 }
@@ -59,16 +72,77 @@ function clearOptions() {
         OPTIONS.element.removeChild(OPTIONS.element.lastChild);
 }
 
-function setOptionsHorizontally() {
-    if (OPTIONS.element.classList.contains('vertical')) {
-        OPTIONS.element.classList.remove('vertical');
+function beginWrite(message) {
+    STORY.data.reading = true;
+    STORY.data.currentMessage = message;
+    STORY.element.innerHTML = '';
+
+    clearOptions();
+    hideDescription();
+}
+
+function continueWrite(message, position, delay, tag) {
+    if (tag) {
+        setTimeout(() => {
+            writeOut(message, position, tag);
+        }, delay / STORY.settings.readSpeed);
+    } else {
+        setTimeout(() => {
+            writeOut(message, position);
+        }, delay / STORY.settings.readSpeed);
     }
 }
 
-function setOptionsVertically() {
-    if (!OPTIONS.element.classList.contains('vertical')) {
-        OPTIONS.element.classList.add('vertical');
+// This fully completes text that is showing
+function stopWrite() {
+
+    // if there's nothing to instantly show...
+    if (STORY.data.currentMessage === '') return;
+
+    STORY.data.reading = false;
+    STORY.element.innerHTML = STORY.data.currentMessage;
+    STORY.data.currentMessage = '';
+
+    presentOptions();
+}
+
+function instantWrite(message) {
+    STORY.data.reading = false;
+    STORY.element.innerHTML = message;
+
+    setTimeout(presentOptions, 5);
+}
+
+function printHTMLTagWrite(message, position) {
+    let tagName = ''
+    let char = message[position++];
+
+    // start of tag until it hits end of start tag
+    do {
+        tagName += char;
+        char = message[position++];
+    } while (char !== '>');
+
+    // if it's a line break...
+    if (tagName === 'br') {
+        STORY.element.innerHTML += '<br>';
+        return writeOut(message, position);
     }
+
+    // tag identified, make an element of it!
+    let tag = makeElement(tagName);
+    STORY.element.appendChild(tag); // add to story element
+
+    writeOut(message, position, tag);
+}
+
+function showDescription() {
+    let option = this;
+    DESCRIPTION.element.innerHTML = option.getAttribute('data-description');
+}
+
+function hideDescription() {
+    DESCRIPTION.element.innerHTML = '';
 }
 
 function hideScrollbar() {
