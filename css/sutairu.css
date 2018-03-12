@@ -126,11 +126,6 @@ html, body {
   background-color: #8573bb;
 }
 
-#options .cell.vertical {
-  padding-top: 5px;
-  flex-direction: column;
-}
-
 #options .cell.hidden {
   visibility: hidden;
 }

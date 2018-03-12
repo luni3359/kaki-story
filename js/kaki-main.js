@@ -36,7 +36,6 @@ function createTextOption() {
     button.innerHTML = textInpt.caption || 'OK';
     button.addEventListener('click', textInpt.event);
 
-    setOptionsVertically();
     OPTIONS.element.innerHTML = textInpt.text;
     OPTIONS.element.appendChild(input);
     OPTIONS.element.appendChild(button);
@@ -46,10 +45,8 @@ function presentOptions() {
     clearOptions();
 
     if (OPTIONS.type === 'text') {
-        setOptionsVertically();
         createTextOption();
     } else if (OPTIONS.type === 'button') {
-        setOptionsHorizontally();
         createButtonOptions();
     }
 }
@@ -57,18 +54,6 @@ function presentOptions() {
 function clearOptions() {
     while (OPTIONS.element.hasChildNodes())
         OPTIONS.element.removeChild(OPTIONS.element.lastChild);
-}
-
-function setOptionsHorizontally() {
-    if (OPTIONS.element.classList.contains('vertical')) {
-        OPTIONS.element.classList.remove('vertical');
-    }
-}
-
-function setOptionsVertically() {
-    if (!OPTIONS.element.classList.contains('vertical')) {
-        OPTIONS.element.classList.add('vertical');
-    }
 }
 
 function hideScrollbar() {
