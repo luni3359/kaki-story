@@ -1,4 +1,6 @@
 :root {
+    --mouse-x: 0px;
+    --mouse-y: 0px;
     --game-height: 500px;
     --game-width: 900px;
     --game-border-width: 4px;
@@ -9,7 +11,7 @@
     --header-height: 15px;
     --act-height: 100px;
 
-    --description-width: 112px;
+    // --description-width: 112px;
     --unsure-width: 112px;
 }
 
@@ -122,6 +124,14 @@ html, body {
     .cell {
         font-size: 0.9em;
     }
+}
+
+#description {
+    position: absolute;
+    height: 90px;
+    width: 250px;
+    top: calc(var(--mouse-y) - 110px);
+    left: calc(var(--mouse-x) - (250px / 2));
 }
 
 #story {

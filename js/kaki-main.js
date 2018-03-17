@@ -219,6 +219,10 @@ function windowResize() {
 function windowLoad() {
     setup();
 
+    OPTIONS.element.addEventListener('mousemove', (e) => {
+        document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+        document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+    });
     STORY.element.addEventListener('click', () => {
         if (STORY.settings.readEnabled) doubleClickHandler(stopWrite);
     });
