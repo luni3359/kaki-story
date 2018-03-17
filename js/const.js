@@ -44,5 +44,15 @@ const PLAYER = {
     name: null,
     setName: name => {
         PLAYER.name = name;
+    },
+    gender: null,
+    setGender: gender => {
+        PLAYER.gender = gender;
+    },
+    isGirl: () => {
+        return PLAYER.gender === 'female';
+    },
+    isBoy: () => {
+        return PLAYER.gender === 'male';
     }
 };

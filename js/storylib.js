@@ -32,6 +32,7 @@ function getResponse() {
 // Use this to write a paragraph, or a word!
 function writeOut(message, position, tagToAppendTo) {
     if (!STORY.settings.readEnabled) {
+        message = autoFormat(message);
         instantWrite(message);
         return;
     }
@@ -39,6 +40,7 @@ function writeOut(message, position, tagToAppendTo) {
     if (!position || position === 0) {
         position = 0;
 
+        message = autoFormat(message);
         beginWrite(message);
     }
 

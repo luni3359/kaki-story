@@ -47,6 +47,11 @@ function createTextOption() {
     let input = makeElement('text');
     let button = createButton(option, true);
 
+    input.setAttribute('data-description', option.description);
+
+    input.addEventListener('focus', showDescription);
+    input.addEventListener('blur', hideDescription);
+
     // if Enter key is pressed
     input.addEventListener('keydown', (e) => {
         if (e.keyCode === 13) // Enter key
@@ -109,6 +114,8 @@ function stopWrite() {
 function instantWrite(message) {
     STORY.data.reading = false;
     STORY.element.innerHTML = message;
+    clearOptions();
+    hideDescription();
 
     setTimeout(presentOptions, 5);
 }
@@ -136,6 +143,36 @@ function printHTMLTagWrite(message, position) {
     writeOut(message, position, tag);
 }
 
+// automatically adds a space after a period if none exists (use it won't do it for triple periods but use the character instead)
+function autoFormat(message) {
+    const findRegex = /[\,\.\…\?\!]/;
+    const artificialLimit = 500;
+    let str = message.replace(/\.\.\./g, '…').trim();
+    let pos = str.search(findRegex);
+    message = '';
+
+    let unloop = 0;
+    do {
+        if (str[++pos] !== ' ') {
+            message += str.substring(0, pos) + ' ';
+            str = str.slice(pos);
+
+            pos = str.search(findRegex);
+            unloop++;
+        }
+    } while (pos !== -1 && unloop < artificialLimit);
+
+    if (unloop >= artificialLimit)
+        throw new Error('Poor coding technique to fixing problems: Loop seeked for more than ' + + ' times for special characters.');
+
+    message = message.trim();
+
+    if (message === '')
+        message = str;
+
+    return message;
+}
+
 function showDescription() {
     let option = this;
     DESCRIPTION.element.innerHTML = option.getAttribute('data-description');
@@ -155,6 +192,11 @@ function hideScrollbar() {
 
 function setup() {
     hideScrollbar();
+}
+
+function toggleReader() {
+    STORY.settings.readEnabled = !STORY.settings.readEnabled;
+    stopWrite();
 }
 
 function doubleClickHandler(funct) {
