@@ -13,20 +13,30 @@
     <div id="game-body" class="table">
         <div class="row header"></div>
         <div class="row content">
-            <div id="description" class="cell-wrap">
+            <!-- <div id="description" class="cell-wrap">
                 <div class="cell"></div>
-            </div>
+            </div> -->
             <div id="story" class="cell-wrap">
                 <div class="cell"></div>
             </div>
         </div>
         <div class="row act">
-            <div id="unsure"></div>
+            <div id="unsure" class="cell-wrap">
+                <div class="cell">
+                    <button onclick="toggleReader()">toggle reader</button>
+                </div>
+            </div>
             <div id="options" class="cell-wrap">
                 <div class="cell"></div>
             </div>
         </div>
     </div>
+
+    <div id="description" class="cell-wrap">
+        <div class="cell"></div>
+    </div>
+
+
     <script src="js/const.js"></script>
     <script src="js/storylib.js"></script>
     <script src="js/kaki-main.js"></script>

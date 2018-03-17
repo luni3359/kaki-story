@@ -14,7 +14,7 @@ function gameNewStart() {
 
     /* askWord works for asking a word!
     * the button says OK by default if you don't specify a word (null)
-    * syntax -> askWord(event, 'Say spell.', 'This is a description for the spell.'); */
+    * syntax -> askWord(event, "Say spell.", "This is a description for the spell."); */
     askWord(whatIsYourName, null, `I won't lie about this.`);
 }
 
@@ -32,10 +32,26 @@ function whatIsYourName() {
 
     // good example to get how options work
     setOption(() => {
-        alert('wrong choice');
-    }, 'Male', 'Am I a boy...?');
+        PLAYER.setGender("male");
+        whatIsYourGender();
+    }, "Male", "Am I a boy...?");
 
     setOption(() => {
-        alert('NICE BRA');
-    }, 'Female', 'Clearly I am a girl!');
+        PLAYER.setGender("female");
+        whatIsYourGender();
+    }, "Female", "Clearly I am a girl!");
+}
+
+function whatIsYourGender() {
+    let message = `You are a ${PLAYER.gender}.`;
+
+    // currently there's no way to add conditions to writeOut; use a variable to store text if you want to add them
+    if (PLAYER.isGirl()) {
+        // += is equal to variable_name = variable_name + "something"
+        message += "You feel good about this.";
+    } else {
+        message += "You don't feel really good about this.";
+    }
+
+    writeOut(message);
 }
