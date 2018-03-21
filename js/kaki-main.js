@@ -163,7 +163,7 @@ function autoFormat(message) {
     } while (pos !== -1 && unloop < artificialLimit);
 
     if (unloop >= artificialLimit)
-        throw new Error('Poor coding technique to fixing problems: Loop seeked for more than ' + + ' times for special characters.');
+        throw new Error(`Poor coding technique to fixing problems: Loop seeked for more than ${artificialLimit} times for special characters.`);
 
     message = message.trim();
 
@@ -171,6 +171,11 @@ function autoFormat(message) {
         message = str;
 
     return message;
+}
+
+function validateInput() {
+    let response = getResponse().trim();
+    return Boolean(response);
 }
 
 function showDescription() {
@@ -188,6 +193,18 @@ function hideScrollbar() {
 
     // Change CSS variable to make sure the push is pixel-perfect, so it's hidden
     document.documentElement.style.setProperty('--game-scrollbar-width', `${scrollbarWidth}px`);
+}
+
+function removeClass(element, classname) {
+    if (element.classList.contains(classname)) {
+        element.classList.remove(classname);
+    }
+}
+
+function addClass(element, classname) {
+    if (!element.classList.contains(classname)) {
+        element.classList.add(classname);
+    }
 }
 
 function setup() {
@@ -219,10 +236,19 @@ function windowResize() {
 function windowLoad() {
     setup();
 
-    OPTIONS.element.addEventListener('mousemove', (e) => {
-        document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
-        document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+    // OPTIONS.element.addEventListener('mousemove', (e) => {
+    //     document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+    //     document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+    // });
+
+    OPTIONS.element.addEventListener('mouseenter', (e) => {
+        removeClass(OPTIONS.element, 'hidden');
     });
+
+    OPTIONS.element.addEventListener('mouseleave', (e) => {
+        addClass(OPTIONS.element, 'hidden');
+    });
+
     STORY.element.addEventListener('click', () => {
         if (STORY.settings.readEnabled) doubleClickHandler(stopWrite);
     });

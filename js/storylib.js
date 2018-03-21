@@ -3,7 +3,11 @@ function askWord(funct, text, description) {
     OPTIONS.contents = [
         {
             text: text,
-            event: funct,
+            event: function () {
+                if (validateInput()) {
+                    funct();
+                }
+            },
             description: description
         }
     ];
