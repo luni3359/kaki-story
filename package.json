@@ -18,9 +18,12 @@
   },
   "homepage": "https://github.com/luni3359/kaki-story#readme",
   "devDependencies": {
-    "browser-sync": "^2.23.6",
+    "browser-sync": "^2.24.5",
     "gulp": "^3.9.1",
-    "gulp-sass": "^3.1.0",
-    "serve": "^6.4.10"
+    "gulp-sass": "^4.0.1",
+    "serve": "^7.2.0"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1"
   }
 }
